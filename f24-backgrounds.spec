@@ -2,11 +2,11 @@
 %global Bg_Name F%{relnum}
 %global bgname %(t="%{Bg_Name}";echo ${t,,})
 
-# Disable Extras
-%global with_extras 0
+# Enable Extras
+%global with_extras 1
 
 Name:           %{bgname}-backgrounds
-Version:        %{relnum}.0.0
+Version:        %{relnum}.1.0
 Release:        1%{?dist}
 Summary:        Fedora %{relnum} default desktop background
 
@@ -119,7 +119,7 @@ This package contains F%{relnum} supplemental wallpapers for XFCE
 %endif
 
 %prep
-%setup -q
+%autosetup
 
 
 %build
@@ -127,13 +127,13 @@ make %{?_smp_mflags}
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 
 %files
 %doc
 
 %files base
-%license CC-BY-SA-3.0 Attribution
+%license CC-BY-SA-4.0 Attribution
 %dir %{_datadir}/backgrounds/%{bgname}
 %dir %{_datadir}/backgrounds/%{bgname}/default
 %{_datadir}/backgrounds/%{bgname}/default/normalish
@@ -156,7 +156,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with_extras}
 %files extras-base
-%license CC-BY-SA-3.0 CC-BY-3.0 CC0-1.0 FAL-1.3 Attribution-Extras
+%license CC-BY-SA-4.0 CC0-1.0 FAL-1.3 Attribution-Extras
 %{_datadir}/backgrounds/%{bgname}/extras/*.jpg
 %{_datadir}/backgrounds/%{bgname}/extras/*.png
 %{_datadir}/backgrounds/%{bgname}/extras/%{bgname}-extras.xml
@@ -176,6 +176,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Sat Apr 23 2016 Luya Tshimbalanga <luya@fedoraproject.org> - 24.1.0-1
+- Added supplemental wallpapers
+
 * Thu Feb 18 2016 Luya Tshimbalanga <luya@fedoraproject.org> - 24.0.0-1
 - Update default wallpaper
 - Initial release
