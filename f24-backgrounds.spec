@@ -6,7 +6,7 @@
 %global with_extras 1
 
 Name:           %{bgname}-backgrounds
-Version:        %{relnum}.1.0
+Version:        %{relnum}.1.1
 Release:        1%{?dist}
 Summary:        Fedora %{relnum} default desktop background
 
@@ -176,6 +176,9 @@ make %{?_smp_mflags}
 %endif
 
 %changelog
+* Wed Apr 27 2016 Luya Tshimbalanga <luya@fedoraproject.org> - 24.1.1-1
+- Upstream release of updated default wallpaper
+
 * Sat Apr 23 2016 Luya Tshimbalanga <luya@fedoraproject.org> - 24.1.0-1
 - Added supplemental wallpapers
 
