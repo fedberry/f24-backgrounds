@@ -1,19 +1,22 @@
 %global relnum 24
 %global Bg_Name F%{relnum}
 %global bgname %(t="%{Bg_Name}";echo ${t,,})
+#fedora f24-background package release
+%global fedrel %{relnum}.1.2
+#fedora git commit for their Source0
+%global fedgit f05f3d2fa13aa3dc4f1092886952013d
 
 # Enable Extras
 %global with_extras 1
 
 Name:           %{bgname}-backgrounds
-Version:        %{relnum}.1.2
+Version:        %{relnum}.2
 Release:        1%{?dist}
-Summary:        Fedora %{relnum} default desktop background
-
+Summary:        FedBerry %{relnum} default desktop background
 License:        CC-BY-SA
-URL:            https://fedoraproject.org/wiki/F%{relnum}_Artwork
-Source0:        https://fedorahosted.org/released/design-team/%{name}-%{version}.tar.xz
-
+URL:            https://github.com/fedberry/f24-backgrounds
+Source0:        http://pkgs.fedoraproject.org/repo/pkgs/%{name}/%{name}-%{fedrel}.tar.xz/%{fedgit}/%{name}-%{fedrel}.tar.xz
+Source1:        https://raw.githubusercontent.com/fedberry/%{name}/master/fedberry-backgrounds-%{version}.tar.xz
 BuildArch:      noarch
 
 # for %%_kde4_* macros
@@ -26,53 +29,53 @@ Requires:       %{name}-mate = %{version}-%{release}
 
 
 %description
-This package contains desktop backgrounds for the Fedora %{relnum} default
+This package contains desktop backgrounds for the FedBerry %{relnum} default
 theme.  Pulls in themes for GNOME, KDE, Mate and Xfce desktops.
 
 %package        base
-Summary:        Base images for Fedora %{relnum} default background
+Summary:        Base images for FedBerry %{relnum} default background
 License:        CC-BY-SA
 
 %description    base
-This package contains base images for Fedora %{relnum} default background.
+This package contains base images for FedBerry %{relnum} default background.
 
 
 %package        kde
-Summary:        Fedora %{relnum} default wallpaper for KDE
+Summary:        FedBerry %{relnum} default wallpaper for KDE
 
 Requires:       %{name}-base = %{version}-%{release}
 Requires:       kde-filesystem
 
 %description    kde
-This package contains KDE desktop wallpaper for the Fedora %{relnum}
+This package contains KDE desktop wallpaper for the FedBerry %{relnum}
 default theme.
 
 %package        gnome
-Summary:        Fedora %{relnum} default wallpaper for Gnome and Cinnamon
+Summary:        FedBerry %{relnum} default wallpaper for Gnome and Cinnamon
 
 Requires:       %{name}-base = %{version}-%{release}
 
 %description    gnome
 This package contains Gnome/Cinnamon desktop wallpaper for the
-Fedora %{relnum} default theme.
+FedBerry %{relnum} default theme.
 
 %package        mate
-Summary:        Fedora %{relnum} default wallpaper for Mate
+Summary:        FedBerry %{relnum} default wallpaper for Mate
 
 Requires:       %{name}-base = %{version}-%{release}
 
 %description    mate
-This package contains Mate desktop wallpaper for the Fedora %{relnum}
+This package contains Mate desktop wallpaper for the FedBerry %{relnum}
 default theme.
 
 %package        xfce
-Summary:        Fedora %{relnum} default background for XFCE4
+Summary:        FedBerry %{relnum} default background for XFCE4
 
 Requires:       %{name}-base = %{version}-%{release}
 Requires:       xfdesktop
 
 %description    xfce
-This package contains XFCE4 desktop background for the Fedora %{relnum}
+This package contains XFCE4 desktop background for the FedBerry %{relnum}
 default theme.
 
 %if %{with_extras}
@@ -119,7 +122,7 @@ This package contains F%{relnum} supplemental wallpapers for XFCE
 %endif
 
 %prep
-%autosetup
+%autosetup -n %{name}-%{fedrel} -a 1
 
 
 %build
@@ -176,6 +179,11 @@ make %{?_smp_mflags}
 %endif
 
 %changelog
+* Sat Sep 10 2016 Vaughan <devel at agrez dot net> - 24.2-1
+- Import package
+- Add default fedberry backgrounds
+- Bump package version
+
 * Wed May 11 2016 Luya Tshimbalanga <luya@fedoraproject.org> - 24.1.2-1
 - Upstream update fixing one wrong supplemental wallpaper 
 
